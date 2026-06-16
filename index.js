@@ -1,15 +1,10 @@
-const express = require('express');
-const app = express();
-app.use(express.json({ limit: '50mb' }));
-let latestImage = ""; 
-
-app.post('/upload', (req, res) => {
-    latestImage = req.body.image;
-    res.status(200).send("OK");
+// 在你的 index.js 中加入這個路徑
+app.get('/view-image', (req, res) => {
+  res.send(`
+    <html>
+      <body style="margin:0; text-align:center;">
+        <img src="${latestImage}" style="width:100%;">
+      </body>
+    </html>
+  `);
 });
-
-app.get('/get-image', (req, res) => {
-    res.send(latestImage);
-});
-
-app.listen(process.env.PORT || 3000);
